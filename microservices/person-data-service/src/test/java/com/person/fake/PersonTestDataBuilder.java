@@ -9,7 +9,6 @@ public class PersonTestDataBuilder {
                 .id(personId)
                 .name("a name")
                 .country("a country")
-                .passportNumber("a passport number")
                 .build();
     }
 }
