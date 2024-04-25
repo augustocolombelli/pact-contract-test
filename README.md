@@ -1,4 +1,4 @@
-# Contract Test Pact
+# Pact Contract Test
 This repository has a use case with contract testing using [Pact](https://docs.pact.io/) test. 
 To make use of contract tests, three microservices were created to test the integration, they are: `book-sales-service`; `person-data-service`; and `book-data-service`.
 
