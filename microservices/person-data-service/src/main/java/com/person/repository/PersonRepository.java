@@ -27,21 +27,18 @@ public class PersonRepository {
                 .id(1001L)
                 .name("John")
                 .country("Brazil")
-                .passportNumber("FT8966563")
                 .build();
 
         Person anotherPerson = Person.builder()
                 .id(1002L)
                 .name("Maria")
                 .country("Brazil")
-                .passportNumber("KY6563225")
                 .build();
 
         Person aThirdPerson = Person.builder()
                 .id(1003L)
                 .name("Robert")
                 .country("Brazil")
-                .passportNumber("LP8968907")
                 .build();
 
         return List.of(aPerson, anotherPerson, aThirdPerson);

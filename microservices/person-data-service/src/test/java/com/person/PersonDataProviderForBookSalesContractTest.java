@@ -49,7 +49,6 @@ public class PersonDataProviderForBookSalesContractTest {
                 .thenReturn(Person.builder()
                         .id(A_PERSON_ID)
                         .name(A_PERSON_NAME)
-                        .passportNumber(A_PERSON_PASSPORT_NUMBER)
                         .build());
     }
 
