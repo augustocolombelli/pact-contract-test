@@ -1,0 +1,44 @@
+---
+version: '3'
+
+services:
+  pactbroker:
+    image: pactfoundation/pact-broker:2.104.0.0
+    environment:
+      PACT_BROKER_DATABASE_ADAPTER: sqlite
+      PACT_BROKER_DATABASE_NAME: pactbroker
+    ports:
+      - "9292:9292"
+  book-sales-service:
+    image: book-sales-service:v1
+    container_name: book-sales-service
+    depends_on:
+      - book-data-service
+      - person-data-service
+    environment:
+      BOOK_DATA_SERVICE_URL: "http://book-data-service:8081"
+      PERSON_DATA_SERVICE_URL: "http://person-data-service:8082"
+    networks:
+      - book_system_net
+    build: ./microservices/book-sales-service/
+    ports:
+      - "8080:8080"
+  book-data-service:
+    image: book-data-service:v1
+    container_name: book-data-service
+    networks:
+      - book_system_net
+    build: ./microservices/book-data-service/
+    ports:
+      - "8081:8081"
+  person-data-service:
+    image: person-data-service:v1
+    container_name: person-data-service
+    networks:
+      - book_system_net
+    build: ./microservices/person-data-service/
+    ports:
+      - "8082:8082"
+networks:
+  book_system_net:
+    driver: bridge
