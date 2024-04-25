@@ -1,14 +1,14 @@
+<<<<<<< HEAD
 # Pact Contract Test
-This repository has a use case with contract testing using [Pact](https://docs.pact.io/) test. 
-To make use of contract tests, three microservices were created to test the integration, they are: `book-sales-service`; `person-data-service`; and `book-data-service`.
+This repository presents a use case of contract testing employing [Pact](https://docs.pact.io/) tests. To facilitate contract testing, three microservices were developed to assess integration: `book-sales-service`, `person-data-service`, and `book-data-service`."
 
-- The `person-data-service` has an API that receives the person's code and returns their data;
-- The `book-data-service` has two APIs, one that receives the book code and returns its data and one responsible for updating the stock;
-- The main service is `book-sales-api`. This is the service responsible for carrying out the sales operation, orchestrating integration with other microservices.
+- The `person-data-service` has an API that receives the person's code and returns their data.
+- The `book-data-service`has two APIs: one that receives the book code and returns its data, and another responsible for updating the stock.
+- The main service is `book-sales-service`. This service is responsible for carrying out the sales operation, orchestrating integration with other microservices.
 
 ![1-container-diagram.png](docs%2Fimages%2F1-container-diagram.png)
 
-All microservices are present in the `microservices` folder. Each of them was created using Java, Spring Boot and Gradlew. Considering the purpose of this project uso contract test, there is no integration with database, all the data are in a memory collection.
+All microservices are located in the `microservices` folder. Each of them was created using Java, Spring Boot, and Gradle. Considering the purpose of this project, which is contract testing, there is no integration with a database; all the data are stored in an in-memory collection.
 
 ## Getting started
 There are two ways to run the services locally: 
