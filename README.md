@@ -116,7 +116,7 @@ Provider:
 - OK - Review all code;
 - OK - Refine the text;
 - OK - Second refinement;
-- Verify all files and create a new project with only one commit - Not forget branches - Create subproject
+- OK - Verify all files and create a new project with only one commit - Not forget branches
 - Add to readme the steps to start the application without docker 
 - Add to readme the steps necessary to run the providers/consumers test
 - Add to readme the steps necessary to run the services with docker-compose
@@ -125,6 +125,7 @@ Provider:
 - Final test without Docker;
 - Final test with Docker;
 - Third and last refinement;
+- Add github project as a public in subproject
 - Publish my Github;
 - Translate to English;
 - Publish to Medium (English)
