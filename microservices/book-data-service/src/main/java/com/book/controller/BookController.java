@@ -41,7 +41,7 @@ public class BookController {
     @PostMapping(value = "/updateStock", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
     public ResponseEntity<UpdateStockApiResponse> updateStock(@Valid @RequestBody UpdateStockApiRequest requestBody) {
         log.info("Update stock API requested with request body {}.", requestBody);
-        UpdateStockResult updateStockResult = bookService.updateStock(requestBody.getId(), requestBody.getQuantity());
+        UpdateStockResult updateStockResult = bookService.updateStock(requestBody.getId(), requestBody.getQuantityToUpdate());
         if (FAILURE.equals(updateStockResult.getStatus())) {
             return new ResponseEntity<>(buildUpdateStockApiResponse(updateStockResult), UNPROCESSABLE_ENTITY);
         }
