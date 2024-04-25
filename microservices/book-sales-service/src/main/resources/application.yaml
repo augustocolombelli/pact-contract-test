@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: book-sales-service
+
+server:
+  port: 8080
+
+service-client:
+  book-data-service:
+    base-url: ${BOOK_DATA_SERVICE_URL:http://localhost:8081}
+    get-book-by-id: "/books/{bookId}"
+    update-stock: "/books/updateStock"
+  person-data-service:
+    base-url: ${PERSON_DATA_SERVICE_URL:http://localhost:8082}
+    get-person-by-id: "/persons/{personId}"
