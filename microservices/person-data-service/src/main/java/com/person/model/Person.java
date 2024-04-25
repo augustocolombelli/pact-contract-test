@@ -9,5 +9,4 @@ public class Person {
     Long id;
     String name;
     String country;
-    String passportNumber;
 }
