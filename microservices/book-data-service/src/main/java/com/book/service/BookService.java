@@ -43,7 +43,7 @@ public class BookService {
                     .build();
         }
         Book book = optionalBook.get();
-        long newStock = book.getStock() + quantity;
+        long newStock = book.getCurrentStock() + quantity;
         if (newStock < 0) {
             String message = String.format("Failed to update stock of book %d because the new stock will be less than 0.", id);
             log.warn(message);

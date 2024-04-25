@@ -50,7 +50,7 @@ public class BookDataProviderForBookSalesContractTest {
         when(bookService.getBookById(A_BOOK_ID))
                 .thenReturn(Book.builder()
                         .id(A_BOOK_ID)
-                        .stock(A_BOOK_STOCK)
+                        .currentStock(A_BOOK_STOCK)
                         .build());
     }
 
