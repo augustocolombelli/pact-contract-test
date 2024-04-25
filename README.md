@@ -6,7 +6,7 @@ To make use of contract tests, three microservices were created to test the inte
 - The `book-data-service` has two APIs, one that receives the book code and returns its data and one responsible for updating the stock;
 - The main service is `book-sales-api`. This is the service responsible for carrying out the sales operation, orchestrating integration with other microservices.
 
-![1-container-diagram.png](c4-diagrams%2Fimages%2F1-container-diagram.png)
+![1-container-diagram.png](docs%2Fimages%2F1-container-diagram.png)
 
 All microservices are present in the `microservices` folder. Each of them was created using Java, Spring Boot and Gradlew. Considering the purpose of this project uso contract test, there is no integration with database, all the data are in a memory collection.
 
