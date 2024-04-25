@@ -10,9 +10,9 @@ public class Book {
     Long id;
     String name;
     String ISBN;
-    Long stock;
+    Long currentStock;
 
     public void updateStock(Long newStock){
-        this.stock = newStock;
+        this.currentStock = newStock;
     }
 }
