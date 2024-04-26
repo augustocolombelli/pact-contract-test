@@ -9,6 +9,19 @@ This repository presents a use case of contract testing employing [Pact](https:/
   <img src="docs/images/container-diagram.png" alt="Book Sales System container diagram" width="623"/>
 </p>
 
+## Table of contents
+* [Getting started](#getting-started)
+  * [Starting Pact broker](#starting-pact-broker)
+  * [Starting book-sales-service](#starting-book-sales-service)
+  * [Starting book-data-service](#starting-book-data-service)
+  * [Starting person-data-service](#starting-person-data-service)
+  * [Contracts tests status](#contracts-tests-status)
+* [Testing the APIs](#testing-the-apis)
+  * [Testing person-data-service](#testing-person-data-service) 
+  * [Testing book-data-service](#testing-book-data-service)
+  * [Testing book-sales-service](#testing-book-sales-service)
+* [Starting with docker compose](#starting-with-docker-compose)
+
 ## Getting started
 All microservices are located in the `microservices` folder. Each of them was created using Java, Spring Boot, and Gradle. Considering the purpose of this project, which is contract testing, there is no integration with a database; all the data are stored in an in-memory collection.
 
@@ -23,7 +36,6 @@ The `pact` broker will be available at `http://localhost:9292/`. A similar page 
 <p align="center">
   <img src="docs/images/initial-page-broker.png" alt="Initial page broker." width="800"/>
 </p>
-
 
 ### Starting `book-sales-service`
 In the `microservices/book-sales-service` folder, it's necessary to clean and build the project.
@@ -99,26 +111,24 @@ curl -X POST --location 'http://localhost:8080/book-sales' \
 --header 'Content-Type: application/json' \
 --data '{"personId": 1001,"bookId": 203}'
 ```
+## Starting with docker compose
+There is an option to start all services using `docker-compose`. This approach is preferable for observing the integration between all services within a `black-box` context.
 
-### Start services with docker compose
-There is an option to start all services using `docker-compose`. This approach is preferable to see the integration between all services in a `black-box` context.
-
-All services and the `pack broker` are included in the file `docker-compose.yml`.
-
-
-Run the command below to start all containers:
-> docker-compose up -d
-
-#### Down the services
-Run the command below to down the services:
-> docker-compose down
-
-Run the commands below to remove the images:
+First make sure that all services is not running and all ports are available to use. Down all services that is running with `docker-compose` with the command below.
+```
+docker-compose down
+```
+When necessary remove the images, run the command below.
 ```
 docker rmi book-sales-service:v1
 docker rmi person-data-service:v1
 docker rmi book-data-service:v1 
 ```
+Now the containers can be started with the command below.
+```
+docker-compose up book-data-service person-data-service book-sales-service -d
+```
+More details to run tests are available in the [Testing the APIs](#testing-the-apis)
 
 ## TODO
 ### Article
@@ -133,7 +143,7 @@ docker rmi book-data-service:v1
 - OK - Add to readme the steps to start the application without docker 
 - OK - Add to readme the steps necessary to run the providers/consumers test
 - OK - Add to readme how it's possible to test all API
-- Add to readme the steps necessary to run the services with docker-compose
+- OK - Add to readme the steps necessary to run the services with docker-compose
 - Cover all code with unit tests;
 - Final test without Docker;
 - Final test with Docker;
