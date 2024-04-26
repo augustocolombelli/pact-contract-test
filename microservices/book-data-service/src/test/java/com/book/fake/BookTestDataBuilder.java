@@ -9,7 +9,6 @@ public class BookTestDataBuilder {
                 .id(bookId)
                 .name("a name")
                 .ISBN("a isbn")
-                .stock(5L)
                 .build();
     }
 
