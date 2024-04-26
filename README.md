@@ -5,18 +5,100 @@ This repository presents a use case of contract testing employing [Pact](https:/
 - The `book-data-service`has two APIs: one that receives the book code and returns its data, and another responsible for updating the stock.
 - The main service is `book-sales-service`. This service is responsible for carrying out the sales operation, orchestrating integration with other microservices.
 
-![1-container-diagram.png](docs%2Fimages%2F1-container-diagram.png)
-
-All microservices are located in the `microservices` folder. Each of them was created using Java, Spring Boot, and Gradle. Considering the purpose of this project, which is contract testing, there is no integration with a database; all the data are stored in an in-memory collection.
+<div style="text-align:center; border: 1px solid black;">
+  <img src="docs/images/container-diagram.png" alt="Book Sales System container diagram" style="width:40%;">
+</div>
 
 ## Getting started
-There are two ways to run the services locally: 
-- Using `docker-compose` to create all the containers used in the application; 
-- Starting each service in our machine with gradle.
+All microservices are located in the `microservices` folder. Each of them was created using Java, Spring Boot, and Gradle. Considering the purpose of this project, which is contract testing, there is no integration with a database; all the data are stored in an in-memory collection.
 
-. If you want to debug the code and run some specific test, it's better to run the service without a container. Below more details for each approach.
+### Starting Pact broker
+It's necessary to start a `pact` broker container to receive the contracts and enable verification. There is a `docker-compose` for all services; the command below shows how to start only the `pact` broker.
+```
+docker-compose up pactbroker -d
+```
 
-### Start services in the machine
+The `pact` broker will be available at `http://localhost:9292/`. A similar page as shown below will be accessible.
+
+<div style="text-align:center; border: 1px solid black;">
+  <img src="docs/images/initial-page-broker.png" alt="Initial page broker" style="width:70%;">
+</div>
+
+### Starting `book-sales-service`
+In the `microservices/book-sales-service` folder, it's necessary to clean and build the project.
+```
+./gradlew clean build
+```
+To publish the contracts to the `broker`, it's necessary to run the command below.
+```
+./gradlew pactPublish
+```
+The service can be started with the command below.
+```
+./gradlew bootRun
+```
+### Starting `book-data-service`
+In the `microservices/book-data-service` folder, it's necessary to clean and build the project. In this case, contract verifications will be run with tests.
+```
+./gradlew clean build
+```
+The service can be started with the command below.
+```
+./gradlew bootRun
+```
+
+### Starting `person-data-service`
+In the `microservices/person-data-service` folder, it's necessary to clean and build the project. Similarly, contract verifications will be run with tests.
+```
+./gradlew clean build
+```
+The service can be started with the command below.
+```
+./gradlew bootRun
+```
+### Contracts tests status
+After running all consumer and provider tests, the broker will have the current status of all contracts. The image below displays the current status of the broker.
+
+<div style="text-align:center; border: 1px solid black;">
+  <img src="docs/images/current-status-contract-tests.png" alt="Contracts tests status" style="width:70%;">
+</div>
+
+
+## Testing the APIs
+
+### Testing `person-data-service`
+Retrieve details for a specific person.
+```
+curl --location --request GET 'http://localhost:8082/persons/1001'  
+```
+Retrieve details for all persons.
+```
+curl --location --request GET 'http://localhost:8082/persons'  
+```
+
+### Testing `book-data-service`
+Retrieve details for a specific book.
+```
+curl --location --request GET 'http://localhost:8081/books/201'
+```
+Retrieve details for all books.
+```
+curl --location --request GET 'http://localhost:8081/books'
+```
+Update the stock of a book.
+```
+curl --location 'http://localhost:8081/books/updateStock' \
+--header 'Content-Type: application/json' \
+--data '{"id": 202,"quantity": 1}'
+```
+
+### Testing `book-sales-service`
+Processing a book sales transaction.
+```
+curl -X POST --location 'http://localhost:8080/book-sales' \
+--header 'Content-Type: application/json' \
+--data '{"personId": 1001,"bookId": 203}'
+```
 
 ### Start services with docker compose
 There is an option to start all services using `docker-compose`. This approach is preferable to see the integration between all services in a `black-box` context.
@@ -38,74 +120,6 @@ docker rmi person-data-service:v1
 docker rmi book-data-service:v1 
 ```
 
-### Testing 
-
-#### Person data service
-Make a request to get persons:
-> curl --location --request GET 'http://localhost:8082/persons'
-> curl --location --request GET 'http://localhost:8082/persons/1001'
-
-#### Book data service
-##### Get books
-Make a request to get persons:
-> curl --location --request GET 'http://localhost:8083/books'
-> curl --location --request GET 'http://localhost:8083/books/201'
-
-##### Update the Stock
-Make a request to update the stock:
-```
-curl --location 'http://localhost:8083/books/updateStock' \
---header 'Content-Type: application/json' \
---data '{"id": 202,"quantity": 1}'
-```
-
-Try to update stock without quantity:
-```
-curl --location 'http://localhost:8083/books/updateStock' \
---header 'Content-Type: application/json' \
---data '{"id": 202}'
-```
-
-Try to update stock without id and quantity:
-```
-curl --location 'http://localhost:8083/books/updateStock' \
---header 'Content-Type: application/json' \
---data '{}'
-```
-
-#### Book sales service
-Make a request to sale a book:
-```
-curl --location 'http://localhost:8081/book-sales' \
---header 'Content-Type: application/json' \
---data '{
-"personId": 1001,
-"bookId": 201
-}'
-```
-
-Try to make a request without values:
-```
-curl --location 'http://localhost:8080/book-sales' \                                                                                                                                ok 
---header 'Content-Type: application/json' \
---data '{}'
-```
-
-### Contract Test
-Consumer (book-sales-service)
-// Clean project
-> ./gradlew clean
-// Build, then will run the test and create the Json with the pact
-> ./gradlew build
-// Publish the contract to broker
-> ./gradlew pactPublish
-
-Provider:
-// Clean the project
-> ./gradlew clean
-// Run the test and check the contract
-> ./gradlew build
-
 ## TODO
 ### Article
 - OK - Finish the topic - Verificação do contrato pelos providers
@@ -116,10 +130,10 @@ Provider:
 - OK - Refine the text;
 - OK - Second refinement;
 - OK - Verify all files and create a new project with only one commit - Not forget branches
-- Add to readme the steps to start the application without docker 
-- Add to readme the steps necessary to run the providers/consumers test
+- OK - Add to readme the steps to start the application without docker 
+- OK - Add to readme the steps necessary to run the providers/consumers test
+- OK - Add to readme how it's possible to test all API
 - Add to readme the steps necessary to run the services with docker-compose
-- Add to readme how it's possible to test all API
 - Cover all code with unit tests;
 - Final test without Docker;
 - Final test with Docker;
