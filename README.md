@@ -10,6 +10,7 @@ This repository presents a use case of contract testing employing [Pact](https:/
 </p>
 
 ## Table of contents
+* [Technologies](#technologies)
 * [Getting started](#getting-started)
   * [Starting Pact broker](#starting-pact-broker)
   * [Starting book-sales-service](#starting-book-sales-service)
@@ -21,6 +22,12 @@ This repository presents a use case of contract testing employing [Pact](https:/
   * [Testing book-data-service](#testing-book-data-service)
   * [Testing book-sales-service](#testing-book-sales-service)
 * [Starting with docker compose](#starting-with-docker-compose)
+
+
+## Technologies
+* Java
+* Spring Boot
+* Pact test
 
 ## Getting started
 All microservices are located in the `microservices` folder. Each of them was created using Java, Spring Boot, and Gradle. Considering the purpose of this project, which is contract testing, there is no integration with a database; all the data are stored in an in-memory collection.
