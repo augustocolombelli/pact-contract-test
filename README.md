@@ -114,7 +114,7 @@ curl -X POST --location 'http://localhost:8080/book-sales' \
 ## Starting with docker compose
 There is an option to start all services using `docker-compose`. This approach is preferable for observing the integration between all services within a `black-box` context.
 
-First make sure that all services is not running and all ports are available to use. Down all services that is running with `docker-compose` with the command below.
+First make sure that all services is not running and all ports are available to use. When applicable, down all services that is running with the command below.
 ```
 docker-compose down
 ```
