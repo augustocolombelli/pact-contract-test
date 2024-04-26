@@ -136,28 +136,3 @@ Now the containers can be started with the command below.
 docker-compose up book-data-service person-data-service book-sales-service -d
 ```
 More details to run tests are available in the [Testing the APIs](#testing-the-apis)
-
-## TODO
-### Article
-- OK - Finish the topic - Verificação do contrato pelos providers
-- OK - Finish the topic - Simulação 3: Provider altera nome do campo para requisição de POST
-- OK - Change all branches name - simulation-1-blababla
-- OK - Review all images;
-- OK - Review all code;
-- OK - Refine the text;
-- OK - Second refinement;
-- OK - Verify all files and create a new project with only one commit - Not forget branches
-- OK - Add to readme the steps to start the application without docker 
-- OK - Add to readme the steps necessary to run the providers/consumers test
-- OK - Add to readme how it's possible to test all API
-- OK - Add to readme the steps necessary to run the services with docker-compose
-- OK - Cover all code with unit tests;
-- OK - Final test without Docker;
-- OK - Final test with Docker;
-- Third and last refinement;
-- Test final in branches with simulation
-- Add github project as a public in subproject
-- Publish to my Github;
-- Translate to English;
-- Publish to Medium (English)
-- Publish to TW (English and Portuguese)
