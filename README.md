@@ -6,13 +6,8 @@ This repository presents a use case of contract testing employing [Pact](https:/
 - The main service is `book-sales-service`. This service is responsible for carrying out the sales operation, orchestrating integration with other microservices.
 
 <p align="center">
-  <img src="docs/images/container-diagram.png" alt="Book Sales System container diagram" width="400"/>
+  <img src="docs/images/container-diagram.png" alt="Book Sales System container diagram" width="623"/>
 </p>
-
-
-<div style="text-align:center; border: 1px solid black;">
-  <img src="docs/images/container-diagram.png" alt="Book Sales System container diagram" style="width:40%;">
-</div>
 
 ## Getting started
 All microservices are located in the `microservices` folder. Each of them was created using Java, Spring Boot, and Gradle. Considering the purpose of this project, which is contract testing, there is no integration with a database; all the data are stored in an in-memory collection.
@@ -25,9 +20,10 @@ docker-compose up pactbroker -d
 
 The `pact` broker will be available at `http://localhost:9292/`. A similar page as shown below will be accessible.
 
-<div style="text-align:center; border: 1px solid black;">
-  <img src="docs/images/initial-page-broker.png" alt="Initial page broker" style="width:70%;">
-</div>
+<p align="center">
+  <img src="docs/images/initial-page-broker.png" alt="Initial page broker." width="800"/>
+</p>
+
 
 ### Starting `book-sales-service`
 In the `microservices/book-sales-service` folder, it's necessary to clean and build the project.
@@ -64,10 +60,9 @@ The service can be started with the command below.
 ### Contracts tests status
 After running all consumer and provider tests, the broker will have the current status of all contracts. The image below displays the current status of the broker.
 
-<div style="text-align:center; border: 1px solid black;">
-  <img src="docs/images/current-status-contract-tests.png" alt="Contracts tests status" style="width:70%;">
-</div>
-
+<p align="center">
+  <img src="docs/images/current-status-contract-tests.png" alt="Contracts tests status." width="800"/>
+</p>
 
 ## Testing the APIs
 
