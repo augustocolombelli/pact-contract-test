@@ -108,7 +108,7 @@ public class BookControllerTest {
     @Nested
     class UpdateStock {
 
-        private static final String A_REQUEST_BODY = "{\"id\": 202,\"quantity\": 1}";
+        private static final String A_REQUEST_BODY = "{\"id\": 202,\"quantityToUpdate\": 1}";
 
         @Test
         void whenMakeRequest_thenResultContentTypeIsJSON() throws Exception {
