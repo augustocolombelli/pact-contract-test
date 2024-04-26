@@ -12,4 +12,5 @@ public class BookTestDataBuilder {
                 .stock(5L)
                 .build();
     }
+
 }

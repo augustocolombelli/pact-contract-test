@@ -3,6 +3,7 @@ package com.person.controller;
 import com.person.exception.PersonNotFoundException;
 import com.person.model.Person;
 import com.person.service.PersonService;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -35,58 +36,68 @@ public class PersonControllerTest {
     @MockBean
     private PersonService personService;
 
-    @Test
-    void getPersons_thenContentTypeIsJSON() throws Exception {
-        this.mockMvc
-                .perform(get(PATH_PERSONS))
-                .andExpect(content().contentType(APPLICATION_JSON));
-    }
+    @Nested
+    class GetPersons {
 
-    @Test
-    void getPersons_thenReturnStatusOK() throws Exception {
-        this.mockMvc
-                .perform(get(PATH_PERSONS))
-                .andExpect(status().isOk());
-    }
+        @Test
+        void whenMakeRequest_thenResultContentTypeIsJSON() throws Exception {
+            mockMvc
+                    .perform(get(PATH_PERSONS))
+                    .andExpect(content().contentType(APPLICATION_JSON));
+        }
 
-    @Test
-    void getPersons_thenReturnPersons() throws Exception {
-        when(personService.getPersons()).thenReturn(List.of(aPerson(A_PERSON_ID), aPerson(ANOTHER_PERSON_ID)));
+        @Test
+        void whenMakeRequest_thenHttpStatusCodeIsOK() throws Exception {
+            mockMvc
+                    .perform(get(PATH_PERSONS))
+                    .andExpect(status().isOk());
+        }
 
-        this.mockMvc
-                .perform(get(PATH_PERSONS))
-                .andExpect(jsonPath("$.[0].id").value(A_PERSON_ID))
-                .andExpect(jsonPath("$.[1].id").value(ANOTHER_PERSON_ID));
+        @Test
+        void whenMakeRequest_thenReturnPersons() throws Exception {
+            when(personService.getPersons()).thenReturn(List.of(aPerson(A_PERSON_ID), aPerson(ANOTHER_PERSON_ID)));
 
-    }
+            mockMvc
+                    .perform(get(PATH_PERSONS))
+                    .andExpect(jsonPath("$.[0].id").value(A_PERSON_ID))
+                    .andExpect(jsonPath("$.[1].id").value(ANOTHER_PERSON_ID));
 
-    @Test
-    void getPersonById_thenReturnStatusOK() throws Exception {
-        this.mockMvc
-                .perform(get(PATH_PERSONS + "/" + A_PERSON_ID))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void getPersonById_thenReturnPerson() throws Exception {
-        Person aPerson = aPerson(A_PERSON_ID);
-
-        when(personService.getPersonById(A_PERSON_ID)).thenReturn(aPerson);
-
-        this.mockMvc
-                .perform(get(PATH_PERSONS + "/" + A_PERSON_ID))
-                .andExpect(jsonPath("$.id").value(A_PERSON_ID))
-                .andExpect(jsonPath("$.name").value(aPerson.getName()));
+        }
 
     }
 
-    @Test
-    void getPersonById_thenReturnEntityNotFound() throws Exception {
-        when(personService.getPersonById(A_PERSON_ID)).thenThrow(PersonNotFoundException.class);
+    @Nested
+    class GetPersonById {
 
-        this.mockMvc
-                .perform(get(PATH_PERSONS + "/" + A_PERSON_ID))
-                .andExpect(jsonPath("$.statusCode").value(404));
+        @Test
+        void whenMakeRequest_thenHttpStatusCodeIsOK() throws Exception {
+            mockMvc
+                    .perform(get(PATH_PERSONS + "/" + A_PERSON_ID))
+                    .andExpect(status().isOk());
+        }
+
+        @Test
+        void whenMakeRequest_thenReturnPerson() throws Exception {
+            Person aPerson = aPerson(A_PERSON_ID);
+
+            when(personService.getPersonById(A_PERSON_ID)).thenReturn(aPerson);
+
+            mockMvc
+                    .perform(get(PATH_PERSONS + "/" + A_PERSON_ID))
+                    .andExpect(jsonPath("$.id").value(A_PERSON_ID))
+                    .andExpect(jsonPath("$.name").value(aPerson.getName()));
+
+        }
+
+        @Test
+        void whenResourceNotExistent_thenReturn404() throws Exception {
+            when(personService.getPersonById(A_PERSON_ID)).thenThrow(PersonNotFoundException.class);
+
+            mockMvc
+                    .perform(get(PATH_PERSONS + "/" + A_PERSON_ID))
+                    .andExpect(jsonPath("$.statusCode").value(404));
+        }
+
     }
 
 }

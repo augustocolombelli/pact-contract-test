@@ -28,7 +28,6 @@ class BookSalesServiceTest {
     private static final Long A_PERSON_ID = 12314L;
     private static final Long A_BOOK_ID = 48585L;
 
-
     @InjectMocks
     private BookSalesService bookSalesService;
 
@@ -42,7 +41,7 @@ class BookSalesServiceTest {
     class ProcessBookSales {
 
         @Test
-        void whenProvidedPersonAndBookId_thenCallPersonDataWebClient() {
+        void whenProcessBookSales_thenCallPersonDataWebClient() {
             // given
             when(bookDataWebClient.retrieveBook(A_BOOK_ID)).thenReturn(aBookDataResponse(A_BOOK_ID));
 
@@ -54,7 +53,7 @@ class BookSalesServiceTest {
         }
 
         @Test
-        void whenProvidedPersonAndBookId_thenCallBookDataWebClient() {
+        void whenProcessBookSales_thenCallBookDataWebClient() {
             // given
             when(bookDataWebClient.retrieveBook(A_BOOK_ID)).thenReturn(aBookDataResponse(A_BOOK_ID));
 
@@ -91,7 +90,7 @@ class BookSalesServiceTest {
         }
 
         @Test
-        void whenProvidedPersonAndBookId_thenReturnsSuccess() {
+        void whenProcessBookSales_thenReturnsSuccess() {
             // given
             when(bookDataWebClient.retrieveBook(A_BOOK_ID)).thenReturn(aBookDataResponse(A_BOOK_ID, 5L));
             when(bookDataWebClient.updateStock(eq(A_BOOK_ID), any())).thenReturn(aBookDataUpdateStockResponse(SUCCESS));
@@ -103,6 +102,7 @@ class BookSalesServiceTest {
             // then
             assertThat(actualResult.getStatus()).isEqualTo(BookSalesStatus.SUCCESS);
         }
+
     }
 
 }

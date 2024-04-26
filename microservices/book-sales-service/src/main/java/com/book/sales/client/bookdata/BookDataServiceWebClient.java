@@ -68,7 +68,7 @@ public class BookDataServiceWebClient {
                 .body(Mono.just(requestBody), BookDataUpdateStockRequest.class)
                 .retrieve()
                 .onStatus(UNPROCESSABLE_ENTITY::equals, BookDataServiceWebClient::onSpecificServerError)
-//                .onStatus(HttpStatusCode::is5xxServerError, BookDataServiceWebClient::onServerError)
+                .onStatus(HttpStatusCode::is5xxServerError, BookDataServiceWebClient::onServerError)
                 .onStatus(HttpStatusCode::is4xxClientError, BookDataServiceWebClient::onClientError)
                 .bodyToMono(BookDataUpdateStockResponse.class)
                 .onErrorMap(WebClientRequestException.class, exception -> new BookDataWebClientRequestException(exception));

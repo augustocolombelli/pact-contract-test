@@ -151,12 +151,13 @@ More details to run tests are available in the [Testing the APIs](#testing-the-a
 - OK - Add to readme the steps necessary to run the providers/consumers test
 - OK - Add to readme how it's possible to test all API
 - OK - Add to readme the steps necessary to run the services with docker-compose
-- Cover all code with unit tests;
-- Final test without Docker;
-- Final test with Docker;
+- OK - Cover all code with unit tests;
+- OK - Final test without Docker;
+- OK - Final test with Docker;
 - Third and last refinement;
+- Test final in branches with simulation
 - Add github project as a public in subproject
-- Publish my Github;
+- Publish to my Github;
 - Translate to English;
 - Publish to Medium (English)
 - Publish to TW (English and Portuguese)

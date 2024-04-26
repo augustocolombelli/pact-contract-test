@@ -32,41 +32,53 @@ public class BookServiceTest {
     class GetBookById {
 
         @Test
-        void getBookById_callGetBookById() {
+        void whenGetBookById_thenCallsRepository() {
+            // given
             when(bookRepository.getBookById(A_BOOK_ID)).thenReturn(Optional.of(aBook(A_BOOK_ID)));
 
+            // when
             bookService.getBookById(A_BOOK_ID);
 
+            // then
             verify(bookRepository).getBookById(A_BOOK_ID);
         }
 
         @Test
-        void getBookById_returnBook() {
+        void whenGetBookById_thenReturnsBook() {
+            // given
             when(bookRepository.getBookById(A_BOOK_ID)).thenReturn(Optional.of(aBook(A_BOOK_ID)));
 
+            // when
             Book actualBook = bookService.getBookById(A_BOOK_ID);
 
+            // then
             assertThat(actualBook.getId()).isEqualTo(A_BOOK_ID);
         }
+
     }
 
     @Nested
     class GetBooks {
+
         @Test
-        void getBooks_callGetBooks() {
+        void whenGetBooks_thenCallRepository() {
             bookService.getBooks();
 
             verify(bookRepository).getBooks();
         }
 
         @Test
-        void getBooks_returnBook() {
+        void whenGetBooks_thenReturnBooks() {
+            // given
             when(bookRepository.getBooks()).thenReturn(List.of(aBook(A_BOOK_ID)));
 
+            // when
             List<Book> actualBooks = bookService.getBooks();
 
+            // then
             assertThat(actualBooks).extracting(Book::getId).contains(A_BOOK_ID);
         }
+        
     }
 
 }

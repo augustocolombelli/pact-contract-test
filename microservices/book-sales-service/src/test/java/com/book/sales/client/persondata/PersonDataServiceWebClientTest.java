@@ -24,9 +24,9 @@ import static org.assertj.core.api.ThrowableAssert.catchThrowable;
 public class PersonDataServiceWebClientTest {
 
     private static final long A_PERSON_ID = 1254L;
+
     private PersonDataServiceWebClient personDataServiceWebClient;
     private static final ObjectMapper objectMapper = new ObjectMapper();
-
     private static MockWebServer mockWebServer;
 
     @BeforeAll

@@ -2,6 +2,7 @@ package com.person.service;
 
 import com.person.model.Person;
 import com.person.repository.PersonRepository;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,36 +27,52 @@ public class PersonServiceTest {
     @Mock
     private PersonRepository personRepository;
 
-    @Test
-    void getPersonById_callGetPersonById() {
-        personService.getPersonById(A_PERSON_ID);
+    @Nested
+    class GetPersonById {
 
-        verify(personRepository).getPersonById(A_PERSON_ID);
+        @Test
+        void whenGetPersonById_thenCallRepository() {
+            personService.getPersonById(A_PERSON_ID);
+
+            verify(personRepository).getPersonById(A_PERSON_ID);
+        }
+
+        @Test
+        void whenGetPersonById_thenReturnPerson() {
+            // given
+            when(personRepository.getPersonById(A_PERSON_ID)).thenReturn(aPerson(A_PERSON_ID));
+
+            // when
+            Person actualPerson = personService.getPersonById(A_PERSON_ID);
+
+            // then
+            assertThat(actualPerson.getId()).isEqualTo(A_PERSON_ID);
+        }
+
     }
 
-    @Test
-    void getPersonById_returnPerson() {
-        when(personRepository.getPersonById(A_PERSON_ID)).thenReturn(aPerson(A_PERSON_ID));
+    @Nested
+    class GetPersons {
 
-        Person actualPerson = personService.getPersonById(A_PERSON_ID);
+        @Test
+        void whenGetPersons_thenCallRepository() {
+            personService.getPersons();
 
-        assertThat(actualPerson.getId()).isEqualTo(A_PERSON_ID);
+            verify(personRepository).getPersons();
+        }
+
+        @Test
+        void whenGetPersons_thenReturnPersons() {
+            // given
+            when(personRepository.getPersons()).thenReturn(List.of(aPerson(A_PERSON_ID)));
+
+            // when
+            List<Person> actualPersons = personService.getPersons();
+
+            // then
+            assertThat(actualPersons).extracting(Person::getId).contains(A_PERSON_ID);
+        }
+
     }
-
-    @Test
-    void getPersons_callGetPersons() {
-        personService.getPersons();
-
-        verify(personRepository).getPersons();
-    }
-
-    @Test
-    void getPersons_returnPerson() {
-        when(personRepository.getPersons()).thenReturn(List.of(aPerson(A_PERSON_ID)));
-
-        List<Person> actualPersons = personService.getPersons();
-
-        assertThat(actualPersons).extracting(Person::getId).contains(A_PERSON_ID);
-    }
-
+    
 }

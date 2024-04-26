@@ -1,6 +1,5 @@
 package com.book.sales.fake;
 
-import com.book.sales.client.bookdata.dto.BookDataResponse;
 import com.book.sales.client.persondata.dto.PersonDataResponse;
 
 public class PersonDataResponseTestDataBuilder {

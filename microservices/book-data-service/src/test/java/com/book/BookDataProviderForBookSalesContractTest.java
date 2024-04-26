@@ -1,7 +1,6 @@
 package com.book;
 
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
-
 import au.com.dius.pact.provider.junitsupport.Provider;
 import au.com.dius.pact.provider.junitsupport.State;
 import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
@@ -10,7 +9,6 @@ import au.com.dius.pact.provider.spring.junit5.PactVerificationSpringProvider;
 import com.book.model.Book;
 import com.book.service.BookService;
 import com.book.service.dto.UpdateStockResult;
-import com.book.service.dto.UpdateStockStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
