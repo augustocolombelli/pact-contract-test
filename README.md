@@ -1,5 +1,5 @@
 # Pact Contract Test
-This repository presents a use case of contract testing employing [Pact](https://docs.pact.io/) tests. To facilitate contract testing, three microservices were developed to assess integration: `book-sales-service`, `person-data-service`, and `book-data-service`."
+This repository presents a use case of contract testing employing [Pact](https://docs.pact.io/) tests. To facilitate contract testing, three microservices were developed to assess integration: `book-sales-service`, `person-data-service`, and `book-data-service`.
 
 - The `person-data-service` has an API that receives the person's code and returns their data.
 - The `book-data-service`has two APIs: one that receives the book code and returns its data, and another responsible for updating the stock.
@@ -16,7 +16,7 @@ This repository presents a use case of contract testing employing [Pact](https:/
   * [Starting book-sales-service](#starting-book-sales-service)
   * [Starting book-data-service](#starting-book-data-service)
   * [Starting person-data-service](#starting-person-data-service)
-  * [Contracts tests status](#contracts-tests-status)
+  * [Contract Tests](#contract-tests)
 * [Testing the APIs](#testing-the-apis)
   * [Testing person-data-service](#testing-person-data-service) 
   * [Testing book-data-service](#testing-book-data-service)
@@ -76,11 +76,11 @@ The service can be started with the command below.
 ```
 ./gradlew bootRun
 ```
-### Contracts tests status
+### Contract Tests
 After running all consumer and provider tests, the broker will have the current status of all contracts. The image below displays the current status of the broker.
 
 <p align="center">
-  <img src="docs/images/current-status-contract-tests.png" alt="Contracts tests status." width="800"/>
+  <img src="docs/images/current-status-contract-tests.png" alt="Contract tests." width="800"/>
 </p>
 
 ## Testing the APIs
