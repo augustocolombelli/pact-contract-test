@@ -5,6 +5,11 @@ This repository presents a use case of contract testing employing [Pact](https:/
 - The `book-data-service`has two APIs: one that receives the book code and returns its data, and another responsible for updating the stock.
 - The main service is `book-sales-service`. This service is responsible for carrying out the sales operation, orchestrating integration with other microservices.
 
+<p align="center">
+  <img src="docs/images/container-diagram.png" alt="Book Sales System container diagram" width="400"/>
+</p>
+
+
 <div style="text-align:center; border: 1px solid black;">
   <img src="docs/images/container-diagram.png" alt="Book Sales System container diagram" style="width:40%;">
 </div>
